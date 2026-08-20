@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explorez des collections sélectionnées, les sujets tendance et de nouvelles découvertes.">
+    <title>Explorer | Atlas</title>
+    <style>
+        :root {
+            --ink: #17221f;
+            --muted: #6c7772;
+            --line: #dfe5df;
+            --paper: #f7f8f4;
+            --panel: #ffffff;
+            --accent: #e56f4d;
+            --accent-dark: #bf5034;
+            --sage: #dce7dc;
+            --shadow: 0 18px 45px rgba(23, 34, 31, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; color: var(--ink); background: var(--paper); font-family: Georgia, 'Times New Roman', serif; }
+        button, input { font: inherit; }
+        button { cursor: pointer; }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        .app-shell {
+            min-height: 100vh;
+            background: radial-gradient(circle at 90% 0%, rgba(220, 231, 220, 0.8), transparent 30rem), var(--paper);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand { color: var(--ink); font-size: 1.35rem; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; }
+        .brand span { color: var(--accent); }
+        .nav { display: flex; gap: 28px; align-items: center; color: var(--muted); font-family: Arial, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .nav a { color: inherit; text-decoration: none; }
+        .nav a[aria-current="page"] { color: var(--ink); }
+        .profile { display: grid; width: 38px; height: 38px; place-items: center; border: 0; border-radius: 50%; color: var(--panel); background: var(--ink); font-family: Arial, sans-serif; font-size: 0.75rem; font-weight: 700; }
+
+        main { max-width: 1240px; margin: 0 auto; padding: 68px 32px 80px; }
+        .intro { max-width: 700px; }
+        .eyebrow { margin: 0 0 14px; color: var(--accent-dark); font-family: Arial, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+        h1 { margin: 0; font-size: clamp(3rem, 7vw, 5.8rem); line-height: 0.94; letter-spacing: -0.04em; }
+        .intro p { max-width: 540px; margin: 24px 0 0; color: var(--muted); font-size: 1.12rem; line-height: 1.6; }
+
+        .toolbar { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin: 56px 0 28px; }
+        .search-wrap { position: relative; flex: 1; max-width: 480px; }
+        .search-wrap::before { content: '⌕'; position: absolute; top: 8px; left: 16px; color: var(--muted); font-family: Arial, sans-serif; font-size: 1.6rem; }
+        .search { width: 100%; padding: 15px 18px 15px 48px; border: 1px solid var(--line); border-radius: 4px; outline: 0; color: var(--ink); background: var(--panel); font-family: Arial, sans-serif; font-size: 0.9rem; }
+        .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(229, 111, 77, 0.14); }
+        .filter-button { padding: 14px 20px; border: 1px solid var(--ink); border-radius: 4px; color: var(--panel); background: var(--ink); font-family: Arial, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; }
+        .category { flex: 0 0 auto; padding: 10px 17px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: transparent; font-family: Arial, sans-serif; font-size: 0.78rem; }
+        .category.active, .category:hover { border-color: var(--accent); color: var(--panel); background: var(--accent); }
+
+        .section-heading { display: flex; justify-content: space-between; align-items: baseline; margin: 58px 0 20px; }
+        h2 { margin: 0; font-size: 1.7rem; letter-spacing: -0.02em; }
+        .section-heading a { color: var(--accent-dark); font-family: Arial, sans-serif; font-size: 0.78rem; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+        .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .content-card { overflow: hidden; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); box-shadow: var(--shadow); transition: transform 180ms ease, box-shadow 180ms ease; }
+        .content-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(23, 34, 31, 0.13); }
+        .card-art { display: flex; min-height: 190px; align-items: flex-end; padding: 20px; background: var(--sage); }
+        .card-art.art-two { background: #f3d6b9; }
+        .card-art.art-three { background: #cbd8e1; }
+        .card-art span { color: rgba(23, 34, 31, 0.7); font-family: Arial, sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .card-body { padding: 20px; }
+        .card-body h3 { margin: 0 0 10px; font-size: 1.35rem; line-height: 1.1; }
+        .card-body p { margin: 0 0 18px; color: var(--muted); font-size: 0.96rem; line-height: 1.5; }
+        .card-meta { display: flex; justify-content: space-between; color: var(--muted); font-family: Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; }
+
+        @media (max-width: 700px) {
+            .topbar, main { padding-left: 20px; padding-right: 20px; }
+            .nav { gap: 14px; }
+            .nav a:not([aria-current="page"]) { display: none; }
+            main { padding-top: 48px; }
+            .toolbar { align-items: stretch; flex-direction: column; margin-top: 40px; }
+            .search-wrap { max-width: none; }
+            .filter-button { align-self: flex-start; }
+            .content-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="#">atla<span>s</span></a>
+            <nav class="nav" aria-label="Navigation principale">
+                <a href="#" aria-current="page">Explorer</a>
+                <a href="#">Enregistrés</a>
+                <a href="#">À propos</a>
+            </nav>
+            <button class="profile" type="button" aria-label="Open profile">AM</button>
+        </header>
+
+        <main>
+            <section class="intro" aria-labelledby="page-title">
+                <p class="eyebrow">Sélectionné pour les esprits curieux</p>
+                <h1 id="page-title">Trouvez quelque chose<br>qui en vaut la peine.</h1>
+                <p>Découvrez des histoires inspirantes, des outils utiles et des idées originales sélectionnés pour vous aider à avancer.</p>
+            </section>
+
+            <section class="explore-controls" aria-label="Contrôles d'exploration">
+                <div class="toolbar">
+                    <label class="search-wrap">
+                        <span class="visually-hidden">Rechercher dans le contenu</span>
+                        <input class="search" type="search" placeholder="Rechercher un sujet, une histoire ou un créateur...">
+                    </label>
+                    <button class="filter-button" type="button">Filtres +</button>
+                </div>
+                <div class="categories" role="list" aria-label="Catégories de contenu">
+                    <button class="category active" type="button">Tout</button>
+                    <button class="category" type="button">Design</button>
+                    <button class="category" type="button">Technologie</button>
+                    <button class="category" type="button">Culture</button>
+                    <button class="category" type="button">Bien-être</button>
+                    <button class="category" type="button">Business</button>
+                </div>
+            </section>
+
+            <section aria-labelledby="trending-title">
+                <div class="section-heading">
+                    <h2 id="trending-title">Tendances du moment</h2>
+                    <a href="#">Tout voir</a>
+                </div>
+                <div class="content-grid">
+                    <article class="content-card">
+                        <div class="card-art"><span>Carnet de notes / 01</span></div>
+                        <div class="card-body">
+                            <h3>Le pouvoir discret du moins</h3>
+                            <p>Comment des contraintes choisies peuvent laisser place à de meilleures idées et à un travail plus clair.</p>
+                            <div class="card-meta"><span>Design</span><span>8 min de lecture</span></div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <div class="card-art art-two"><span>Carnet de notes / 02</span></div>
+                        <div class="card-body">
+                            <h3>Construire pour l'entre-deux</h3>
+                            <p>Un guide pratique pour créer des produits qui s'adaptent avec élégance aux contextes changeants.</p>
+                            <div class="card-meta"><span>Technologie</span><span>6 min de lecture</span></div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <div class="card-art art-three"><span>Carnet de notes / 03</span></div>
+                        <div class="card-body">
+                            <h3>Faire une place à l'émerveillement</h3>
+                            <p>De petits rituels et de grandes questions pour une pratique créative plus attentive.</p>
+                            <div class="card-meta"><span>Culture</span><span>5 min de lecture</span></div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
