@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>À propos | WoeLab</title>
+
+    <!-- Police Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #f57c00;
+            --secondary: #111827;
+            --dark: #0f172a;
+            --text: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--secondary);
+            line-height: 1.7;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 430px;
+            background:
+                linear-gradient(rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.82)),
+                url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 65px);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 18px;
+            color: #e2e8f0;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-top: 10px;
+        }
+
+        /* PRESENTATION */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-text h2 {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .about-text h2 span {
+            color: var(--primary);
+        }
+
+        .about-text p {
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 13px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #d96700;
+            transform: translateY(-2px);
+        }
+
+        /* MISSION */
+        .mission-section {
+            background: var(--dark);
+            color: white;
+        }
+
+        .mission-section .section-title h2 {
+            color: white;
+        }
+
+        .mission-section .section-title p {
+            color: #cbd5e1;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        /* ACTIVITES */
+        .activities {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .activity {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+            transition: 0.3s;
+        }
+
+        .activity:hover {
+            transform: translateY(-8px);
+        }
+
+        .activity .icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .activity h3 {
+            font-size: 17px;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 70px 30px;
+            background: linear-gradient(135deg, var(--primary), #ff9f1c);
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #020617;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .about-grid,
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .activities {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .activities {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-text h2,
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">INNOVATION • TECHNOLOGIE • COLLABORATION</div>
+
+            <h1>À propos de WoeLab</h1>
+
+            <p>
+                Un espace collaboratif dédié à l'innovation, à la créativité,
+                à la technologie et au développement des compétences.
+            </p>
+        </div>
+    </header>
+
+
+    <!-- PRESENTATION -->
+    <section>
+        <div class="container about-grid">
+
+            <div class="about-image">
+                <img
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+                    alt="Espace collaboratif WoeLab">
+            </div>
+
+            <div class="about-text">
+                <h2>Un espace où les <span>idées prennent vie</span></h2>
+
+                <p>
+                    WoeLab est un espace d'innovation et de collaboration qui
+                    rassemble des jeunes, des étudiants, des entrepreneurs,
+                    des créateurs et des passionnés de technologie.
+                </p>
+
+                <p>
+                    À travers ses différentes activités, formations et projets,
+                    WoeLab encourage la créativité, le partage des connaissances
+                    et la création de solutions innovantes adaptées aux besoins
+                    de la communauté.
+                </p>
+
+                <p>
+                    Notre objectif est de permettre à chacun de développer ses
+                    compétences, de transformer ses idées en projets concrets
+                    et de participer activement à la construction du futur.
+                </p>
+
+                <a href="#mission" class="btn">Découvrir notre mission</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MISSION -->
+    <section class="mission-section" id="mission">
+        <div class="container">
+
+            <div class="section-title">
+                <span>Notre vision</span>
+                <h2>Construire ensemble le futur</h2>
+                <p>
+                    WoeLab place l'innovation et la collaboration au cœur
+                    du développement des compétences et des projets.
+                </p>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h3>Innovation</h3>
+                    <p>
+                        Encourager la recherche, la créativité et la conception
+                        de solutions innovantes face aux défis actuels.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"></div>
+                    <h3>Collaboration</h3>
+                    <p>
+                        Créer un environnement où les talents peuvent partager
+                        leurs connaissances et travailler ensemble.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Autonomisation</h3>
+                    <p>
+                        Accompagner les jeunes et les porteurs de projets dans
+                        le développement de leurs compétences et initiatives.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ACTIVITES -->
+    <section>
+        <div class="container">
+
+            <div class="section-title">
+                <span>Nos domaines</span>
+                <h2>Ce que nous faisons</h2>
+            </div>
+
+            <div class="activities">
+
+                <div class="activity">
+                    <div class="icon">💻</div>
+                    <h3>Technologie</h3>
+                </div>
+
+                <div class="activity">
+                    <div class="icon">🎓</div>
+                    <h3>Formation</h3>
+                </div>
+
+                <div class="activity">
+                    <div class="icon">🎨</div>
+                    <h3>Créativité</h3>
+                </div>
+
+                <div class="activity">
+                    <div class="icon">🏗️</div>
+                    <h3>Prototypage</h3>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Rejoignez l'aventure WoeLab</h2>
+
+        <p>
+            Découvrez un environnement dynamique où les idées, les compétences
+            et les talents se rencontrent pour créer des projets innovants.
+        </p>
+
+        <a href="contact.html" class="btn">Nous contacter</a>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © 2026 <strong>WoeLab</strong> — Innovation, Collaboration et Créativité.
+        </p>
+    </footer>
+
+</body>
+</html>
